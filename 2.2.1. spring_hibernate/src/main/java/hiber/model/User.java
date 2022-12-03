@@ -21,7 +21,7 @@ public class User {
 
 
     @MapsId // связывает одну колонку с другой работате с @Id и @EmbeddedLd
-    @OneToOne// указывает на тип отношений между объектами
+    @OneToOne(cascade = CascadeType.ALL)// указывает на тип отношений между объектами
     @JoinColumn(name = "car_id")//указывает на столбец осуществляет связь с другим объектом
     //этим выражением мы говорим хибернейту что для связи с классом car
     // в таблице кторая связана с классом юзер есть столбец id
@@ -66,6 +66,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override

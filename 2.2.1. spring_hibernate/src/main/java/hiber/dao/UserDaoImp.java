@@ -1,12 +1,10 @@
 package hiber.dao;
 
 import hiber.model.User;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -16,7 +14,7 @@ public class UserDaoImp implements UserDao {
 
    private static Session HibernateUser;
    @Autowired
-   private SessionFactory sessionFactory;
+   private static SessionFactory sessionFactory;
 
    @Override
    public void add(User user) {
@@ -29,18 +27,17 @@ public class UserDaoImp implements UserDao {
       TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
       return query.getResultList();
    }
-   private static void getSessionFactory() {
+   public List<User> getUserByCar(String model, int series) {
+      String hqlQuery = "from User u join fetch u.car as ca where ca.model like :model and ca.series =:series";
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hqlQuery);
+      query.setParameter("model", model);
+      query.setParameter("series", series);
+      return  query.getResultList();
 
-      try(Session session = HibernateUser.getSessionFactory().openSession()) {
-
-         String HQL= "FROM model model LEFT OUTER JOIN FETCH model.car WHERE model.model=:model";
-         Model model = session.createQuery(HQL, model.class).setParameter("model").uniqueResult();
-         System.out.println(model);
-         System.out.println(model.getSessionFactory());
-      } catch (HibernateException e) {
-         e.printStackTrace();
-      }
 
    }
 
-}
+
+   }
+
+
