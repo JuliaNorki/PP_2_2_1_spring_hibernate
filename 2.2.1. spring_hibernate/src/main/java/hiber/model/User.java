@@ -21,7 +21,7 @@ public class User {
 
 
     @MapsId // связывает одну колонку с другой работате с @Id и @EmbeddedLd
-    @OneToOne(cascade = CascadeType.ALL)// указывает на тип отношений между объектами
+    @OneToOne()// указывает на тип отношений между объектами
     @JoinColumn(name = "car_id")//указывает на столбец осуществляет связь с другим объектом
     //этим выражением мы говорим хибернейту что для связи с классом car
     // в таблице кторая связана с классом юзер есть столбец id
@@ -30,7 +30,7 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

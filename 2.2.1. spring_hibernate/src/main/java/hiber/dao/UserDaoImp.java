@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
-   private static Session HibernateUser;
+   private Session HibernateUser;
    @Autowired
-   private static SessionFactory sessionFactory;
+   private  SessionFactory sessionFactory;
 
    @Override
    public void add(User user) {

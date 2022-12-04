@@ -33,7 +33,7 @@ import javax.persistence.*;
                         this.series = series;
                 }
 
-                public Car() {}
+                public Car(String s) {}
 
 
                 public Car(String model, int series) {
